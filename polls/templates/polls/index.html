@@ -1,0 +1,22 @@
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+
+    <ul>
+    {% for question in questions %}
+        <li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+
+<br>
+
+<ul>
+	<li> Name: {{ my_user.name }} </li>
+	<li> Province: {{ my_user.province }} </li>
+	<li> Occupation: {{ my_user.occupation }} </li>
+	<li> Sex: {{ my_user.sex }} </li>		
+</ul>
+
+<br>
+
+<li><a href="{% url 'polls:logout' %}">LogOut</a></li>

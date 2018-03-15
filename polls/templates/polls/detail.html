@@ -1,0 +1,27 @@
+
+{% load static %}
+<head>
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}" />
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+<!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.2/css/materialize.min.css">
+ <meta name="viewport" content="width=device-width, initial-scale=1.0"/> -->
+</head>
+
+
+<h1 style="color: white;">{{ question.question_text }}</h1>
+
+<div>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+<form action="{% url 'polls:vote' question.id %}" method="post">
+{% csrf_token %}
+{% for choice in question.choice_set.all %}
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}" />
+    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br />
+{% endfor %}
+<input type="submit" value="Vote" />
+</form>
+
+</div>
